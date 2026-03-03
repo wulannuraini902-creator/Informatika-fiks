@@ -1,68 +1,165 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f9f9ff;
-  margin: 0;
-  padding: 20px;
+* {
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e0f7ff, #f3e8ff);
+  padding: 15px;
+  color: #333;
+}
+
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-button {
-  background: #b8c0ff;
+header h1 {
+  font-size: 18px;
+}
+
+header button {
+  background: linear-gradient(135deg, #a0c4ff, #cdb4db);
   border: none;
-  padding: 10px 15px;
-  border-radius: 10px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: 0.3s;
 }
 
-button:hover {
+header button:hover {
   transform: scale(1.05);
 }
 
+/* CARD */
 .task-card {
   padding: 15px;
-  border-radius: 15px;
-  margin-top: 15px;
-  color: #333;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   animation: fadeIn 0.4s ease-in-out;
 }
 
+/* PROGRESS */
 .progress-bar {
   width: 100%;
-  height: 10px;
-  background: #ddd;
+  height: 8px;
+  background: rgba(255,255,255,0.5);
   border-radius: 10px;
+  margin: 10px 0;
   overflow: hidden;
 }
 
 .progress-bar div {
   height: 100%;
-  width: 0%;
-  background: #7bdff2;
+  background: linear-gradient(90deg, #80ed99, #72ddf7);
   transition: width 0.4s ease;
 }
 
+/* BUTTON */
+.task-card button {
+  background: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s;
+}
+
+.task-card button:hover {
+  transform: scale(1.05);
+}
+
+/* INDICATOR BOX */
+.task-card input[type="text"],
+.task-card input[type="date"] {
+  border: none;
+  padding: 6px;
+  border-radius: 10px;
+  margin-top: 5px;
+  font-size: 12px;
+  width: 100%;
+}
+
+.task-card input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 5px;
+}
+
+/* MODAL */
 .modal {
   display: none;
   position: fixed;
-  background: rgba(0,0,0,0.3);
   inset: 0;
+  background: rgba(0,0,0,0.3);
   justify-content: center;
   align-items: center;
+  padding: 15px;
 }
 
 .modal-content {
   background: white;
   padding: 20px;
-  border-radius: 15px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.modal-content button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 15px;
+  border: none;
+  background: linear-gradient(135deg, #a0c4ff, #cdb4db);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* OVERALL PROGRESS */
+#overallProgressContainer {
+  background: white;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ANIMATION */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 16px;
+  }
+
+  .task-card {
+    padding: 12px;
+  }
+
+  .modal-content {
+    padding: 15px;
+  }
 }
