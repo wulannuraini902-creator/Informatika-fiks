@@ -33,11 +33,22 @@ function addSubject() {
 
 function addIndicator(index) {
   subjects[index].indicators.push({
-    text: "Indikator Baru",
+    text: "",
+    deadline: "",
     done: false
   });
   saveData();
   render();
+}
+
+function updateIndicatorText(sIndex, iIndex, value) {
+  subjects[sIndex].indicators[iIndex].text = value;
+  saveData();
+}
+
+function updateIndicatorDeadline(sIndex, iIndex, value) {
+  subjects[sIndex].indicators[iIndex].deadline = value;
+  saveData();
 }
 
 function toggleIndicator(sIndex, iIndex) {
@@ -68,6 +79,8 @@ function calculateOverallProgress() {
 }
 
 function getCountdown(deadline) {
+  if (!deadline) return "";
+
   const today = new Date();
   const due = new Date(deadline);
   const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
@@ -94,18 +107,35 @@ function render() {
 
     card.innerHTML = `
       <h2>${sub.emoji} ${sub.name}</h2>
-      <p>${getCountdown(sub.deadline)}</p>
+      <p>Deadline Subject: ${getCountdown(sub.deadline)}</p>
+
       <div class="progress-bar">
         <div style="width:${percent}%"></div>
       </div>
+
       <button onclick="addIndicator(${sIndex})">+ Indikator</button>
+
       <div>
         ${sub.indicators.map((ind, iIndex) => `
-          <div>
+          <div style="margin-top:10px; padding:8px; background:white; border-radius:8px;">
             <input type="checkbox"
               ${ind.done ? "checked" : ""}
               onchange="toggleIndicator(${sIndex},${iIndex})">
-            ${ind.text}
+
+            <input type="text"
+              placeholder="Tulis indikator..."
+              value="${ind.text}"
+              oninput="updateIndicatorText(${sIndex},${iIndex}, this.value)"
+              style="margin-left:5px;">
+
+            <input type="date"
+              value="${ind.deadline}"
+              onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)"
+              style="margin-left:5px;">
+
+            <div style="font-size:12px; color:red;">
+              ${getCountdown(ind.deadline)}
+            </div>
           </div>
         `).join("")}
       </div>
