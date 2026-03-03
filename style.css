@@ -68,3 +68,29 @@ button {
   border-radius: 10px;
   border: none;
 }
+.indicator-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.indicator-card.overdue {
+  box-shadow: 0 0 12px red;
+}
+
+.indicator-card.today {
+  box-shadow: 0 0 12px orange;
+}
+
+.indicator-card.soon {
+  box-shadow: 0 0 12px yellow;
+}
+
+.indicator-card.normal {
+  box-shadow: 0 0 10px cyan;
+}
+
+.countdown {
+  font-size: 12px;
+  font-weight: bold;
+}
