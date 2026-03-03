@@ -28,19 +28,55 @@ button {
   background: rgba(255,255,255,0.05);
 }
 
+/* INDICATOR MODERN UPGRADE */
+
 .indicator-card {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.08);
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(0,255,255,0.05));
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 15px rgba(0,255,255,0.25);
+  transition: 0.3s;
+}
+
+.indicator-top {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 12px;
+}
+
+.indicator-top input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;   /* 👈 Dibesarkan */
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  outline: none;
+}
+
+.indicator-bottom {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.indicator-card.done input[type="text"] {
-  text-decoration: line-through;
-  opacity: 0.6;
+.indicator-bottom input[type="date"] {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 10px;
+  padding: 6px 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.countdown {
+  font-size: 13px;   /* 👈 Lebih jelas */
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 /* MODAL FIX MOBILE */
