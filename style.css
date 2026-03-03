@@ -4,10 +4,22 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #e0f7ff, #f3e8ff);
+  font-family: 'Rajdhani', sans-serif;
+  background: radial-gradient(circle at top, #1a1a2e, #0f0f1a, #000);
+  color: white;
   padding: 15px;
-  color: #333;
+  overflow-x: hidden;
+}
+
+/* Bintang Background */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity: 0.3;
+  z-index: -1;
 }
 
 /* HEADER */
@@ -15,34 +27,40 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 header h1 {
+  font-family: 'Orbitron', sans-serif;
   font-size: 18px;
+  letter-spacing: 1px;
 }
 
 header button {
-  background: linear-gradient(135deg, #a0c4ff, #cdb4db);
+  background: linear-gradient(135deg, #6a00ff, #00f5ff);
   border: none;
   padding: 8px 14px;
   border-radius: 20px;
+  color: white;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 15px #00f5ff;
   transition: 0.3s;
 }
 
 header button:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 25px #00f5ff;
 }
 
 /* CARD */
 .task-card {
   padding: 15px;
   border-radius: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,255,255,0.2);
   animation: fadeIn 0.4s ease-in-out;
 }
 
@@ -50,7 +68,7 @@ header button:hover {
 .progress-bar {
   width: 100%;
   height: 8px;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.1);
   border-radius: 10px;
   margin: 10px 0;
   overflow: hidden;
@@ -58,18 +76,20 @@ header button:hover {
 
 .progress-bar div {
   height: 100%;
-  background: linear-gradient(90deg, #80ed99, #72ddf7);
+  background: linear-gradient(90deg, #00f5ff, #6a00ff);
+  box-shadow: 0 0 10px #00f5ff;
   transition: width 0.4s ease;
 }
 
 /* BUTTON */
 .task-card button {
-  background: white;
+  background: linear-gradient(135deg, #6a00ff, #00f5ff);
   border: none;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 15px;
   font-size: 12px;
   cursor: pointer;
+  color: white;
   margin-top: 8px;
   transition: 0.2s;
 }
@@ -78,7 +98,7 @@ header button:hover {
   transform: scale(1.05);
 }
 
-/* INDICATOR BOX */
+/* INPUT */
 .task-card input[type="text"],
 .task-card input[type="date"] {
   border: none;
@@ -87,11 +107,14 @@ header button:hover {
   margin-top: 5px;
   font-size: 12px;
   width: 100%;
+  background: rgba(255,255,255,0.1);
+  color: white;
 }
 
 .task-card input[type="checkbox"] {
   transform: scale(1.2);
   margin-right: 5px;
+  accent-color: #00f5ff;
 }
 
 /* MODAL */
@@ -99,19 +122,19 @@ header button:hover {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.6);
   justify-content: center;
   align-items: center;
   padding: 15px;
 }
 
 .modal-content {
-  background: white;
+  background: #111;
   padding: 20px;
   border-radius: 20px;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 0 25px #6a00ff;
 }
 
 .modal-content input,
@@ -120,7 +143,9 @@ header button:hover {
   margin-top: 10px;
   padding: 8px;
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
 }
 
 .modal-content button {
@@ -129,37 +154,22 @@ header button:hover {
   padding: 8px;
   border-radius: 15px;
   border: none;
-  background: linear-gradient(135deg, #a0c4ff, #cdb4db);
+  background: linear-gradient(135deg, #6a00ff, #00f5ff);
   font-weight: bold;
+  color: white;
   cursor: pointer;
 }
 
-/* OVERALL PROGRESS */
+/* OVERALL */
 #overallProgressContainer {
-  background: white;
+  background: rgba(255,255,255,0.05);
   padding: 15px;
   border-radius: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0,255,255,0.2);
 }
 
-/* ANIMATION */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* MOBILE OPTIMIZATION */
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 16px;
-  }
-
-  .task-card {
-    padding: 12px;
-  }
-
-  .modal-content {
-    padding: 15px;
-  }
 }
