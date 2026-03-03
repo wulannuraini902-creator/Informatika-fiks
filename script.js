@@ -151,3 +151,10 @@ function render() {
     container.appendChild(card);
   });
 }
+function deleteSubject(index) {
+  if (confirm("Yakin mau hapus mission ini? 🚀")) {
+    subjects.splice(index, 1);
+    saveData();
+    render();
+  }
+}
