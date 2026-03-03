@@ -99,7 +99,8 @@ header button:hover {
 }
 
 /* INPUT */
-..task-card input[type="text"],
+
+.task-card input[type="text"],
 .task-card input[type="date"] {
   border: none;
   padding: 8px;
@@ -107,9 +108,20 @@ header button:hover {
   margin-top: 5px;
   font-size: 13px;
   width: 100%;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.12);
   color: #ffffff;
   outline: none;
+}
+
+.task-card input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.task-card input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 5px;
+  accent-color: #00f5ff;
+}
 
 }
 
@@ -229,10 +241,6 @@ header button:hover {
   opacity: 0.6;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 /* Glow Effects */
 .indicator-card {
   animation: fadeIn 0.4s ease;
@@ -300,5 +308,23 @@ header button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* Mobile Optimization */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  header h1 {
+    font-size: 16px;
+  }
+
+  .task-card {
+    padding: 12px;
+  }
+
+  .indicator-card {
+    padding: 10px;
   }
 }
