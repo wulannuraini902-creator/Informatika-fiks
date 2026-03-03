@@ -233,3 +233,72 @@ header button:hover {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* Glow Effects */
+.indicator-card {
+  animation: fadeIn 0.4s ease;
+  transition: 0.3s;
+}
+
+.indicator-card.overdue {
+  box-shadow: 0 0 15px red;
+}
+
+.indicator-card.today {
+  box-shadow: 0 0 15px orange;
+}
+
+.indicator-card.soon {
+  box-shadow: 0 0 15px yellow;
+}
+
+.indicator-card.normal {
+  box-shadow: 0 0 10px cyan;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 18px;
+}
+
+.delete-small {
+  background: none;
+  border: none;
+  font-size: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Meteor */
+.meteor {
+  position: fixed;
+  top: -20px;
+  width: 3px;
+  height: 80px;
+  background: linear-gradient(white, transparent);
+  animation: fall 2s linear;
+  opacity: 0.7;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) translateX(-100px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
