@@ -6,8 +6,6 @@
   <title>Space Task App</title>
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- Space Font -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Rajdhani:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
@@ -15,7 +13,7 @@
 
 <header>
   <h1>🚀 Space Task Manager</h1>
-  <button class="add-btn" onclick="openModal()">+ Add Task</button>
+  <button onclick="openModal()">+ Add Task</button>
 </header>
 
 <section id="overallProgressContainer">
@@ -46,17 +44,11 @@
 
     <input type="color" id="colorPicker" value="#1f4068">
 
-    <div class="modal-buttons">
-      <button onclick="addSubject()">Simpan</button>
-      <button onclick="closeModal()">Batal</button>
-    </div>
+    <button onclick="addSubject()">Simpan</button>
+    <button onclick="closeModal()">Batal</button>
   </div>
 </div>
 
-<!-- Confetti -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <script src="script.js"></script>
-
 </body>
 </html>
