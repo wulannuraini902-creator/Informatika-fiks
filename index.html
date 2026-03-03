@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pastel Task App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>📒 Aplikasi Catatan Tugas</h1>
+  <button onclick="openModal()">+ Add Task</button>
+</header>
+
+<div id="overallProgressContainer">
+  <h3>Overall Progress</h3>
+  <div class="progress-bar">
+    <div id="overallProgress"></div>
+  </div>
+</div>
+
+<div id="taskContainer"></div>
+
+<!-- Modal -->
+<div id="taskModal" class="modal">
+  <div class="modal-content">
+    <h2>Tambah Mata Pelajaran</h2>
+    <input type="text" id="subjectName" placeholder="Nama Mata Pelajaran">
+    <input type="date" id="deadline">
+    <select id="emoji">
+      <option>📚</option>
+      <option>✏️</option>
+      <option>🔬</option>
+      <option>🧮</option>
+      <option>🌍</option>
+      <option>🎨</option>
+    </select>
+    <input type="color" id="colorPicker" value="#a0d8ef">
+    <button onclick="addSubject()">Simpan</button>
+    <button onclick="closeModal()">Batal</button>
+  </div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
