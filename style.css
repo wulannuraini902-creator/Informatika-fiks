@@ -43,30 +43,96 @@ button {
   opacity: 0.6;
 }
 
+/* MODAL FIX MOBILE */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(5px);
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  z-index: 999;
 }
 
 .modal-content {
-  background: #111;
+  background: #0f0f1a;
   padding: 20px;
   border-radius: 20px;
-  width: 90%;
-  max-width: 350px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 0 30px rgba(0,255,255,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
 .modal-content input,
 .modal-content select {
   width: 100%;
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 10px;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 12px;
   border: none;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal-content input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+/* BUTTON WRAPPER */
+.modal-content .button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-content button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #6a00ff, #00f5ff);
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-content button:hover {
+  transform: scale(1.05);
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #00f5ff;
+  box-shadow: 0 0 10px #00f5ff;
+}
+.modal-content input::placeholder {
+  color: rgba(255,255,255,0.6);
 }
 .indicator-card {
   display: flex;
