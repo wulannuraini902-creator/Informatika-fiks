@@ -89,8 +89,28 @@ function render() {
     card.className = "task-card";
     card.style.border = `2px solid ${sub.color}`;
 
+    let doneCount = sub.indicators.filter(i => i.done).length;
+    let total = sub.indicators.length;
+    let percent = total ? Math.round((doneCount / total) * 100) : 0;
+
+    const isComplete = total > 0 && percent === 100;
+
     card.innerHTML = `
-      <h2>${sub.emoji} ${sub.name}</h2>
+      <div class="card-header">
+        <h2>${sub.emoji} ${sub.name}</h2>
+        <button class="delete-btn" onclick="deleteSubject(${sIndex})">🗑</button>
+      </div>
+
+      <div class="progress-bar">
+        <div style="width:${percent}%"></div>
+      </div>
+
+      ${isComplete ? `
+        <div class="mission-complete">
+          🚀 MISSION COMPLETE 100%
+        </div>
+      ` : ""}
+
       <button onclick="addIndicator(${sIndex})">+ Indikator</button>
 
       ${sub.indicators.map((ind, iIndex) => {
@@ -104,7 +124,7 @@ function render() {
 
         return `
         <div class="indicator-card ${ind.done ? "done" : ""} ${statusClass}">
-
+          
           <div class="indicator-top">
             <input type="checkbox"
               ${ind.done ? "checked" : ""}
@@ -120,7 +140,6 @@ function render() {
             <input type="date"
               value="${ind.deadline}"
               onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)">
-
             <div class="countdown">${countdown}</div>
           </div>
 
@@ -132,5 +151,3 @@ function render() {
     container.appendChild(card);
   });
 }
-
-render();
