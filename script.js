@@ -104,21 +104,25 @@ function render() {
 
         return `
         <div class="indicator-card ${ind.done ? "done" : ""} ${statusClass}">
-          
-          <input type="checkbox"
-            ${ind.done ? "checked" : ""}
-            onchange="toggleIndicator(${sIndex},${iIndex})">
 
-          <input type="text"
-            placeholder="Tulis indikator..."
-            value="${ind.text}"
-            oninput="updateIndicatorText(${sIndex},${iIndex}, this.value)">
+          <div class="indicator-top">
+            <input type="checkbox"
+              ${ind.done ? "checked" : ""}
+              onchange="toggleIndicator(${sIndex},${iIndex})">
 
-          <input type="date"
-            value="${ind.deadline}"
-            onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)">
+            <input type="text"
+              placeholder="Tulis indikator..."
+              value="${ind.text}"
+              oninput="updateIndicatorText(${sIndex},${iIndex}, this.value)">
+          </div>
 
-          <div class="countdown">${countdown}</div>
+          <div class="indicator-bottom">
+            <input type="date"
+              value="${ind.deadline}"
+              onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)">
+
+            <div class="countdown">${countdown}</div>
+          </div>
 
         </div>
         `;
