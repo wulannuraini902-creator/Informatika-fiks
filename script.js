@@ -68,14 +68,15 @@ function getCountdown(deadline) {
   const today = new Date();
   const due = new Date(deadline);
 
+  // Reset jam biar tidak error beda waktu
   today.setHours(0,0,0,0);
   due.setHours(0,0,0,0);
 
-  const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+  const diff = Math.floor((due - today) / (1000 * 60 * 60 * 24));
 
-  if (diff < 0) return "Overdue ❗";
   if (diff === 0) return "Today 🔥";
   if (diff === 1) return "Tomorrow ⚠️";
+  if (diff < 0) return "Overdue ❗";
   return diff + " hari lagi";
 }
 
@@ -159,3 +160,6 @@ function deleteSubject(index) {
     render();
   }
 }
+setInterval(() => {
+  render();
+}, 60000); // update setiap 1 menit
