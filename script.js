@@ -1,22 +1,18 @@
 let subjects = JSON.parse(localStorage.getItem("subjects")) || [];
 
+/* ================= SAVE ================= */
 function saveData() {
   localStorage.setItem("subjects", JSON.stringify(subjects));
 }
 
-function openModal() {
-  document.getElementById("taskModal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("taskModal").style.display = "none";
-}
-
+/* ================= SUBJECT ================= */
 function addSubject() {
   const name = document.getElementById("subjectName").value;
   const deadline = document.getElementById("deadline").value;
-  const emoji = document.getElementById("emoji").value;
-  const color = document.getElementById("colorPicker").value;
+  const emoji = document.getElementById("emoji").value || "📘";
+  const color = document.getElementById("colorPicker").value || "#00f5ff";
+
+  if (!name) return alert("Isi nama mapel dulu yaa ✨");
 
   subjects.push({
     name,
@@ -28,15 +24,28 @@ function addSubject() {
 
   saveData();
   render();
-  closeModal();
 }
 
+function deleteSubject(index) {
+  subjects.splice(index, 1);
+  saveData();
+  render();
+}
+
+/* ================= INDICATOR ================= */
 function addIndicator(index) {
   subjects[index].indicators.push({
     text: "",
     deadline: "",
     done: false
   });
+
+  saveData();
+  render();
+}
+
+function deleteIndicator(sIndex, iIndex) {
+  subjects[sIndex].indicators.splice(iIndex, 1);
   saveData();
   render();
 }
@@ -49,6 +58,7 @@ function updateIndicatorText(sIndex, iIndex, value) {
 function updateIndicatorDeadline(sIndex, iIndex, value) {
   subjects[sIndex].indicators[iIndex].deadline = value;
   saveData();
+  render();
 }
 
 function toggleIndicator(sIndex, iIndex) {
@@ -59,6 +69,7 @@ function toggleIndicator(sIndex, iIndex) {
   render();
 }
 
+/* ================= PROGRESS ================= */
 function calculateOverallProgress() {
   let total = 0;
   let done = 0;
@@ -78,24 +89,32 @@ function calculateOverallProgress() {
   }
 }
 
+/* ================= COUNTDOWN ================= */
 function getCountdown(deadline) {
-  if (!deadline) return "";
+  if (!deadline) return { text: "", type: "normal" };
 
   const today = new Date();
   const due = new Date(deadline);
+
+  today.setHours(0,0,0,0);
+  due.setHours(0,0,0,0);
+
   const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
 
-  if (diff === 0) return "Today 🔥";
-  if (diff === 1) return "Tomorrow ⚠️";
-  if (diff < 0) return "Overdue ❗";
-  return diff + " hari lagi";
+  if (diff < 0) return { text: "Overdue ❗", type: "overdue" };
+  if (diff === 0) return { text: "Today 🔥", type: "today" };
+  if (diff === 1) return { text: "Tomorrow ⚠️", type: "soon" };
+
+  return { text: diff + " hari lagi", type: "normal" };
 }
 
+/* ================= RENDER ================= */
 function render() {
   const container = document.getElementById("taskContainer");
   container.innerHTML = "";
 
   subjects.forEach((sub, sIndex) => {
+
     const card = document.createElement("div");
     card.className = "task-card";
 
@@ -105,69 +124,59 @@ function render() {
       : 0;
 
     card.innerHTML = `
-      <h2>${sub.emoji} ${sub.name}</h2>
-      <p>Deadline Subject: ${getCountdown(sub.deadline)}</p>
+      <div class="card-header">
+        <h2>${sub.emoji} ${sub.name}</h2>
+        <button class="delete-btn" onclick="deleteSubject(${sIndex})">✖</button>
+      </div>
+
+      <p class="subject-deadline">
+        ${sub.deadline ? getCountdown(sub.deadline).text : ""}
+      </p>
 
       <div class="progress-bar">
         <div style="width:${percent}%"></div>
       </div>
 
-      <button onclick="addIndicator(${sIndex})">+ Indikator</button>
+      <button class="add-btn" onclick="addIndicator(${sIndex})">
+        + Indikator
+      </button>
 
-      <div>
+      <div class="indicator-container">
         ${sub.indicators.map((ind, iIndex) => {
 
-          const countdown = getCountdown(ind.deadline);
-          const isOverdue = countdown.includes("Overdue");
+          const countdownObj = getCountdown(ind.deadline);
 
           return `
-          <div style="
-            margin-top:12px;
-            padding:12px;
-            background: rgba(255,255,255,0.08);
-            border-radius:12px;
-            backdrop-filter: blur(8px);
-            box-shadow: ${isOverdue ? "0 0 15px red" : "0 0 10px rgba(0,255,255,0.2)"};
-          ">
-            <input type="checkbox"
-              ${ind.done ? "checked" : ""}
-              onchange="toggleIndicator(${sIndex},${iIndex})">
+            <div class="indicator-card ${countdownObj.type}">
+              
+              <div class="indicator-top">
+                <input type="checkbox"
+                  ${ind.done ? "checked" : ""}
+                  onchange="toggleIndicator(${sIndex},${iIndex})">
 
-            <input type="text"
-              placeholder="Tulis indikator..."
-              value="${ind.text}"
-              oninput="updateIndicatorText(${sIndex},${iIndex}, this.value)"
-              style="
-                margin-top:8px;
-                width:100%;
-                background: transparent;
-                border:none;
-                color:white;
-                font-size:14px;
-                text-decoration:${ind.done ? "line-through" : "none"};
-              ">
+                <input type="text"
+                  class="indicator-text"
+                  placeholder="Tulis indikator..."
+                  value="${ind.text}"
+                  oninput="updateIndicatorText(${sIndex},${iIndex}, this.value)"
+                  style="text-decoration:${ind.done ? "line-through" : "none"};">
+                  
+                <button class="delete-small"
+                  onclick="deleteIndicator(${sIndex},${iIndex})">
+                  🗑
+                </button>
+              </div>
 
-            <input type="date"
-              value="${ind.deadline}"
-              onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)"
-              style="
-                margin-top:8px;
-                width:100%;
-                background: rgba(255,255,255,0.1);
-                border:none;
-                border-radius:8px;
-                padding:5px;
-                color:white;
-              ">
+              <input type="date"
+                value="${ind.deadline}"
+                onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)"
+                class="date-input">
 
-            <div style="
-              font-size:12px;
-              margin-top:5px;
-              color:${isOverdue ? "red" : "#00f5ff"};
-            ">
-              ${countdown}
+              <div class="countdown ${countdownObj.type}">
+                ${countdownObj.text}
+              </div>
+
             </div>
-          </div>
           `;
         }).join("")}
       </div>
@@ -180,3 +189,13 @@ function render() {
 }
 
 render();
+
+/* ================= METEOR EFFECT ================= */
+setInterval(() => {
+  const meteor = document.createElement("div");
+  meteor.className = "meteor";
+  meteor.style.left = Math.random() * window.innerWidth + "px";
+  document.body.appendChild(meteor);
+
+  setTimeout(() => meteor.remove(), 2000);
+}, 3000);
