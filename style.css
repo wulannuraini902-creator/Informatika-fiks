@@ -173,6 +173,61 @@ header button:hover {
   margin-bottom: 20px;
   box-shadow: 0 0 20px rgba(0,255,255,0.2);
 }
+/* INDICATOR MODERN */
+.indicator-card {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 12px rgba(0,255,255,0.15);
+  transition: 0.3s;
+}
+
+.indicator-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(0,255,255,0.3);
+}
+
+.indicator-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.indicator-top input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.indicator-bottom {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.indicator-bottom input[type="date"] {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 4px 6px;
+  color: white;
+}
+
+.countdown {
+  font-size: 12px;
+  color: #00f5ff;
+}
+
+.indicator-card.done input[type="text"] {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
