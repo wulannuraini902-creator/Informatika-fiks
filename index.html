@@ -24,13 +24,12 @@
 </section>
 
 <main id="taskContainer"></main>
-
-<!-- Modal -->
 <div id="taskModal" class="modal">
   <div class="modal-content">
     <h2>Tambah Mata Pelajaran</h2>
 
     <input type="text" id="subjectName" placeholder="Nama Mata Pelajaran">
+
     <input type="date" id="deadline">
 
     <select id="emoji">
@@ -42,10 +41,13 @@
       <option>🎨</option>
     </select>
 
-    <input type="color" id="colorPicker" value="#1f4068">
+    <input type="color" id="colorPicker" value="#a0d8ef">
 
-    <button onclick="addSubject()">Simpan</button>
-    <button onclick="closeModal()">Batal</button>
+    <div class="button-group">
+      <button onclick="addSubject()">Simpan</button>
+      <button onclick="closeModal()">Batal</button>
+    </div>
+
   </div>
 </div>
 
