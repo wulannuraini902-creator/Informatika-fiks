@@ -98,7 +98,6 @@ function render() {
   subjects.forEach((sub, sIndex) => {
     const card = document.createElement("div");
     card.className = "task-card";
-    card.style.background = sub.color;
 
     let doneCount = sub.indicators.filter(i => i.done).length;
     let percent = sub.indicators.length
@@ -116,8 +115,20 @@ function render() {
       <button onclick="addIndicator(${sIndex})">+ Indikator</button>
 
       <div>
-        ${sub.indicators.map((ind, iIndex) => `
-          <div style="margin-top:10px; padding:8px; background:white; border-radius:8px;">
+        ${sub.indicators.map((ind, iIndex) => {
+
+          const countdown = getCountdown(ind.deadline);
+          const isOverdue = countdown.includes("Overdue");
+
+          return `
+          <div style="
+            margin-top:12px;
+            padding:12px;
+            background: rgba(255,255,255,0.08);
+            border-radius:12px;
+            backdrop-filter: blur(8px);
+            box-shadow: ${isOverdue ? "0 0 15px red" : "0 0 10px rgba(0,255,255,0.2)"};
+          ">
             <input type="checkbox"
               ${ind.done ? "checked" : ""}
               onchange="toggleIndicator(${sIndex},${iIndex})">
@@ -126,18 +137,39 @@ function render() {
               placeholder="Tulis indikator..."
               value="${ind.text}"
               oninput="updateIndicatorText(${sIndex},${iIndex}, this.value)"
-              style="margin-left:5px;">
+              style="
+                margin-top:8px;
+                width:100%;
+                background: transparent;
+                border:none;
+                color:white;
+                font-size:14px;
+                text-decoration:${ind.done ? "line-through" : "none"};
+              ">
 
             <input type="date"
               value="${ind.deadline}"
               onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)"
-              style="margin-left:5px;">
+              style="
+                margin-top:8px;
+                width:100%;
+                background: rgba(255,255,255,0.1);
+                border:none;
+                border-radius:8px;
+                padding:5px;
+                color:white;
+              ">
 
-            <div style="font-size:12px; color:red;">
-              ${getCountdown(ind.deadline)}
+            <div style="
+              font-size:12px;
+              margin-top:5px;
+              color:${isOverdue ? "red" : "#00f5ff"};
+            ">
+              ${countdown}
             </div>
           </div>
-        `).join("")}
+          `;
+        }).join("")}
       </div>
     `;
 
