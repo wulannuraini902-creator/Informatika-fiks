@@ -30,14 +30,22 @@ button {
 
 /* INDICATOR MODERN UPGRADE */
 
+/* ===== INDICATOR STYLE - DARK GLASS LIKE MODAL ===== */
+
 .indicator-card {
   margin-top: 16px;
   padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(0,255,255,0.05));
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 15px rgba(0,255,255,0.25);
+  border-radius: 20px;
+  background: rgba(15,15,25,0.85);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0,255,255,0.2);
+  box-shadow: 0 0 20px rgba(0,255,255,0.15);
   transition: 0.3s;
+}
+
+.indicator-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0,255,255,0.35);
 }
 
 .indicator-top {
@@ -48,13 +56,18 @@ button {
 
 .indicator-top input[type="text"] {
   flex: 1;
-  background: transparent;
+  background: rgba(255,255,255,0.06);
   border: none;
+  border-radius: 14px;
+  padding: 12px;
   color: white;
-  font-size: 16px;   /* 👈 Dibesarkan */
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: 0.5px;
   outline: none;
+}
+
+.indicator-top input::placeholder {
+  color: rgba(255,255,255,0.4);
 }
 
 .indicator-bottom {
@@ -62,21 +75,29 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .indicator-bottom input[type="date"] {
-  background: rgba(255,255,255,0.15);
+  flex: 1;
+  background: rgba(255,255,255,0.06);
   border: none;
-  border-radius: 10px;
-  padding: 6px 10px;
+  border-radius: 14px;
+  padding: 10px;
   color: white;
   font-size: 14px;
 }
 
 .countdown {
-  font-size: 13px;   /* 👈 Lebih jelas */
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  color: #00f5ff;
+}
+
+/* DONE STYLE */
+.indicator-card.done input[type="text"] {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 /* MODAL FIX MOBILE */
