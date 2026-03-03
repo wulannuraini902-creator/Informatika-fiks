@@ -51,47 +51,32 @@ button {
 .indicator-top {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .indicator-top input[type="text"] {
   flex: 1;
-  background: rgba(255,255,255,0.06);
-  border: none;
-  border-radius: 14px;
-  padding: 12px;
-  color: white;
   font-size: 15px;
-  font-weight: 500;
-  outline: none;
-}
-
-.indicator-top input::placeholder {
-  color: rgba(255,255,255,0.4);
+  padding: 8px;
+  border-radius: 10px;
 }
 
 .indicator-bottom {
-  margin-top: 12px;
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
 }
 
 .indicator-bottom input[type="date"] {
-  flex: 1;
-  background: rgba(255,255,255,0.06);
-  border: none;
-  border-radius: 14px;
-  padding: 10px;
-  color: white;
+  padding: 6px 8px;
+  border-radius: 8px;
   font-size: 14px;
 }
 
 .countdown {
   font-size: 13px;
   font-weight: 500;
-  color: #00f5ff;
 }
 
 /* DONE STYLE */
