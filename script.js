@@ -1,15 +1,7 @@
-let subjects = [];
+let subjects = JSON.parse(localStorage.getItem("subjects")) || [];
 
 function saveData() {
   localStorage.setItem("subjects", JSON.stringify(subjects));
-}
-
-function loadData() {
-  const data = localStorage.getItem("subjects");
-  if (data) {
-    subjects = JSON.parse(data);
-    render();
-  }
 }
 
 function openModal() {
@@ -52,12 +44,39 @@ function addIndicator(index) {
   render();
 }
 
+function updateIndicatorText(sIndex, iIndex, value) {
+  subjects[sIndex].indicators[iIndex].text = value;
+  saveData();
+}
+
+function updateIndicatorDeadline(sIndex, iIndex, value) {
+  subjects[sIndex].indicators[iIndex].deadline = value;
+  saveData();
+}
+
 function toggleIndicator(sIndex, iIndex) {
   subjects[sIndex].indicators[iIndex].done =
     !subjects[sIndex].indicators[iIndex].done;
 
   saveData();
   render();
+}
+
+function getCountdown(deadline) {
+  if (!deadline) return "";
+
+  const today = new Date();
+  const due = new Date(deadline);
+
+  today.setHours(0,0,0,0);
+  due.setHours(0,0,0,0);
+
+  const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+
+  if (diff < 0) return "Overdue ❗";
+  if (diff === 0) return "Today 🔥";
+  if (diff === 1) return "Tomorrow ⚠️";
+  return diff + " hari lagi";
 }
 
 function render() {
@@ -74,20 +93,40 @@ function render() {
       <h2>${sub.emoji} ${sub.name}</h2>
       <button onclick="addIndicator(${sIndex})">+ Indikator</button>
 
-      ${sub.indicators.map((ind, iIndex) => `
-        <div class="indicator-card ${ind.done ? "done" : ""}">
+      ${sub.indicators.map((ind, iIndex) => {
+
+        const countdown = getCountdown(ind.deadline);
+
+        let statusClass = "normal";
+        if (countdown.includes("Overdue")) statusClass = "overdue";
+        else if (countdown.includes("Today")) statusClass = "today";
+        else if (countdown.includes("Tomorrow")) statusClass = "soon";
+
+        return `
+        <div class="indicator-card ${ind.done ? "done" : ""} ${statusClass}">
+          
           <input type="checkbox"
             ${ind.done ? "checked" : ""}
             onchange="toggleIndicator(${sIndex},${iIndex})">
+
           <input type="text"
             placeholder="Tulis indikator..."
-            value="${ind.text}">
+            value="${ind.text}"
+            oninput="updateIndicatorText(${sIndex},${iIndex}, this.value)">
+
+          <input type="date"
+            value="${ind.deadline}"
+            onchange="updateIndicatorDeadline(${sIndex},${iIndex}, this.value)">
+
+          <div class="countdown">${countdown}</div>
+
         </div>
-      `).join("")}
+        `;
+      }).join("")}
     `;
 
     container.appendChild(card);
   });
 }
 
-loadData();
+render();
