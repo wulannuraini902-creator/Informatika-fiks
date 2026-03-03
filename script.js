@@ -157,9 +157,14 @@ function deleteSubject(index) {
   if (confirm("Yakin mau hapus mission ini? 🚀")) {
     subjects.splice(index, 1);
     saveData();
-    render();
-  }
-}
+    window.onload = function () {
+  subjects = JSON.parse(localStorage.getItem("subjects")) || [];
+  render();
+};
+
 setInterval(() => {
   render();
 }, 60000); // update setiap 1 menit
+    function saveData() {
+  localStorage.setItem("subjects", JSON.stringify(subjects));
+}
