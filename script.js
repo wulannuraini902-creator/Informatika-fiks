@@ -93,7 +93,10 @@ function render() {
     let total = sub.indicators.length;
     let percent = total ? Math.round((doneCount / total) * 100) : 0;
 
-    const isComplete = total > 0 && percent === 100;
+    const missionText =
+      percent === 100 && total > 0
+        ? "🚀 MISSION COMPLETE"
+        : "🚀 Mission Progress";
 
     card.innerHTML = `
       <div class="card-header">
@@ -101,15 +104,13 @@ function render() {
         <button class="delete-btn" onclick="deleteSubject(${sIndex})">🗑</button>
       </div>
 
+      <div class="mission-status">
+        ${missionText}: ${percent}%
+      </div>
+
       <div class="progress-bar">
         <div style="width:${percent}%"></div>
       </div>
-
-      ${isComplete ? `
-        <div class="mission-complete">
-          🚀 MISSION COMPLETE 100%
-        </div>
-      ` : ""}
 
       <button onclick="addIndicator(${sIndex})">+ Indikator</button>
 
