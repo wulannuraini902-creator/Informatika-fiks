@@ -1,49 +1,47 @@
 body {
-margin: 0;
-font-family: 'Rajdhani', sans-serif;
-background: radial-gradient(circle at top, #1a1a2e, #000);
-color: white;
-padding: 15px;
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  background: radial-gradient(circle at top, #1a1a2e, #000);
+  color: white;
+  padding: 15px;
 }
 
+/* HEADER */
 header {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 button {
-background: linear-gradient(135deg, #6a00ff, #00f5ff);
-border: none;
-padding: 8px 14px;
-border-radius: 20px;
-color: white;
-cursor: pointer;
+  background: linear-gradient(135deg, #6a00ff, #00f5ff);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
 }
 
+/* TASK CARD */
 .task-card {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* jarak antar indikator + tombol */
+  gap: 12px; /* jarak tombol & indikator */
+  padding: 15px;
+  border-radius: 20px;
+  margin-top: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  border: 2px solid cyan; /* bisa ganti sesuai sub.color di JS */
 }
 
-/* INDICATOR MODERN UPGRADE */
-
-/* ===== INDICATOR STYLE - DARK GLASS LIKE MODAL ===== */
-
-/* Pastikan container indikator ada jarak antar indikator */
-.task-card > .indicator-card {
-  margin-top: 12px; /* jarak antar indikator */
-}
-
-/* Atau lebih spesifik */
+/* INDICATOR CARD */
 .indicator-card {
-  margin-top: 10px;
-  padding: 16px;
-  border-radius: 18px;
   display: flex;
   flex-direction: column;
-  gap: 8px; /* jarak antar input checkbox & teks & date */
+  gap: 8px; /* jarak antara teks & date */
+  padding: 16px;
+  border-radius: 18px;
   background: rgba(15,15,25,0.85);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(0,255,255,0.2);
@@ -51,176 +49,111 @@ cursor: pointer;
 }
 
 .indicator-card:hover {
-transform: translateY(-3px);
-box-shadow: 0 0 25px rgba(0,255,255,0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0,255,255,0.35);
 }
 
+/* TOP / BOTTOM INPUT */
 .indicator-top {
-display: flex;
-align-items: center;
-gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .indicator-top input[type="text"] {
-flex: 1;
-font-size: 15px;
-padding: 8px;
-border-radius: 10px;
+  flex: 1;
+  font-size: 15px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  outline: none;
 }
 
 .indicator-bottom {
-margin-top: 10px;
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
 .indicator-bottom input[type="date"] {
-padding: 6px 8px;
-border-radius: 8px;
-font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-size: 14px;
 }
 
 .countdown {
-font-size: 13px;
-font-weight: 500;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 /* DONE STYLE */
 .indicator-card.done input[type="text"] {
-text-decoration: line-through;
-opacity: 0.6;
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
-/* MODAL FIX MOBILE */
+/* MISSION STATUS */
+.mission-status {
+  margin: 10px 0;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00f5ff, #6a00ff);
+  box-shadow: 0 0 20px #00f5ff;
+  animation: glowPulse 1.5s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { box-shadow: 0 0 10px #00f5ff; }
+  to { box-shadow: 0 0 25px #6a00ff; }
+}
+
+/* MODAL */
 .modal {
-display: none;
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.75);
-backdrop-filter: blur(5px);
-justify-content: center;
-align-items: center;
-padding: 20px;
-z-index: 999;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 999;
 }
 
 .modal-content {
-background: #0f0f1a;
-padding: 20px;
-border-radius: 20px;
-width: 100%;
-max-width: 360px;
-box-shadow: 0 0 30px rgba(0,255,255,0.3);
-animation: fadeIn 0.3s ease;
-}
-
-.modal-content h2 {
-margin-top: 0;
-font-family: 'Orbitron', sans-serif;
-font-size: 18px;
-margin-bottom: 15px;
+  background: #0f0f1a;
+  padding: 20px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 0 30px rgba(0,255,255,0.3);
+  animation: fadeIn 0.3s ease;
 }
 
 .modal-content input,
 .modal-content select {
-width: 100%;
-margin-bottom: 12px;
-padding: 10px;
-border-radius: 12px;
-border: none;
-background: rgba(255,255,255,0.12);
-color: white;
-font-size: 14px;
-outline: none;
-}
-
-.modal-content input::placeholder {
-color: rgba(255,255,255,0.5);
-}
-
-/* BUTTON WRAPPER */
-.modal-content .button-group {
-display: flex;
-gap: 10px;
-}
-
-.modal-content button {
-flex: 1;
-padding: 10px;
-border-radius: 20px;
-border: none;
-background: linear-gradient(135deg, #6a00ff, #00f5ff);
-font-weight: bold;
-color: white;
-cursor: pointer;
-transition: 0.3s;
-}
-
-.modal-content button:hover {
-transform: scale(1.05);
-}
-
-.modal-content input,
-.modal-content select {
-width: 100%;
-margin-top: 12px;
-padding: 12px;
-border-radius: 14px;
-border: 1px solid rgba(0,255,255,0.3);
-background: rgba(255,255,255,0.08);
-color: white;
-font-size: 14px;
-outline: none;
-transition: 0.3s;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
 }
 
 .modal-content input:focus,
 .modal-content select:focus {
-border-color: #00f5ff;
-box-shadow: 0 0 10px #00f5ff;
-}
-.modal-content input::placeholder {
-color: rgba(255,255,255,0.6);
-}
-.indicator-card {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-.indicator-card.overdue {
-box-shadow: 0 0 12px red;
-}
-
-.indicator-card.today {
-box-shadow: 0 0 12px orange;
-}
-
-.indicator-card.soon {
-box-shadow: 0 0 12px yellow;
-}
-
-.indicator-card.normal {
-box-shadow: 0 0 10px cyan;
-}
-
-.countdown {
-font-size: 12px;
-font-weight: bold;
-}
-.mission-status {
-margin: 10px 0;
-padding: 8px;
-text-align: center;
-font-weight: bold;
-border-radius: 12px;
-background: linear-gradient(135deg, #00f5ff, #6a00ff);
-box-shadow: 0 0 20px #00f5ff;
-animation: glowPulse 1.5s infinite alternate;
-}
-
-@keyframes glowPulse {
-from { box-shadow: 0 0 10px #00f5ff; }
-to { box-shadow: 0 0 25px #6a00ff; }
+  border-color: #00f5ff;
+  box-shadow: 0 0 10px #00f5ff;
 }
